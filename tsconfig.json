@@ -19,7 +19,11 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "stream": ["./node_modules/stream-browserify"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
