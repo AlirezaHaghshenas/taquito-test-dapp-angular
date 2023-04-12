@@ -13,7 +13,7 @@ export class ConnectComponent {
   selectedNetwork: NetworkInfo | undefined;
 
   constructor(private tezos: TezosService, private router: Router) {
-    this.networks = tezos.getAvailableNetworks();
+    this.networks = tezos.availableNetworks;
   }
 
   async connect() {

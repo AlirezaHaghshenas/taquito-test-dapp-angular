@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TezosToolkit } from '@taquito/taquito';
-import { ConnectionInfo, NetworkInfo, TezosNetworks } from '../models/tezos-models';
+import {
+  ConnectionInfo,
+  NetworkInfo,
+  TezosNetworks,
+} from '../models/tezos-models';
 import { BeaconWallet } from '@taquito/beacon-wallet';
+import { DAppClientOptions } from '@airgap/beacon-sdk';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +14,10 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 export class TezosService {
   constructor() {}
 
-  private _tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
+  private _tezos: TezosToolkit | undefined;
   private _connectionInfo: ConnectionInfo | undefined;
 
-  getAvailableNetworks() {
+  get availableNetworks() {
     return TezosNetworks;
   }
 
@@ -20,10 +25,14 @@ export class TezosService {
     return this._connectionInfo;
   }
 
-  async connect({ network }: { network: NetworkInfo }) {
-    this._tezos.setRpcProvider(network.RPCUrl);
+  get tezos() {
+    return this._tezos;
+  }
 
-    const options = {
+  async connect({ network }: { network: NetworkInfo }) {
+    this._tezos = new TezosToolkit(network.RPCUrl);
+
+    const options: DAppClientOptions = {
       name: 'Taquito Test Dapp - Angular',
       iconUrl: 'https://tezostaquito.io/img/favicon.svg',
       preferredNetwork: network.type,
@@ -36,13 +45,13 @@ export class TezosService {
       },
     };
     const wallet = new BeaconWallet(options);
-    await wallet.requestPermissions({network});
+    await wallet.requestPermissions({ network });
     const address = await wallet.getPKH();
     console.log(`Your address: ${address}`);
     this._tezos.setWalletProvider(wallet);
     this._connectionInfo = {
       network,
-      address
-    }
+      address,
+    };
   }
 }
