@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, ConnectedGuard, DisconnectedGuard } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConnectComponent } from './connect/connect.component';
@@ -23,7 +23,7 @@ import './polyfill.ts';
     MatCardModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [ConnectedGuard, DisconnectedGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

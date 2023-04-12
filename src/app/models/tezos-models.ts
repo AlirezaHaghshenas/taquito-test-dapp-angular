@@ -6,6 +6,11 @@ export type NetworkInfo = {
   type: NetworkType;
 };
 
+export type ConnectionInfo = {
+  network: NetworkInfo;
+  address: string;
+}
+
 export const TezosNetworks: NetworkInfo[] = [
   {
     name: 'Ghostnet',

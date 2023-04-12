@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TezosToolkit } from '@taquito/taquito';
-import { NetworkInfo, TezosNetworks } from '../models/tezos-models';
+import { ConnectionInfo, NetworkInfo, TezosNetworks } from '../models/tezos-models';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 
 @Injectable({
@@ -10,13 +10,14 @@ export class TezosService {
   constructor() {}
 
   private _tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
+  private _connectionInfo: ConnectionInfo | undefined;
 
   getAvailableNetworks() {
     return TezosNetworks;
   }
 
-  isConnected() {
-    return false;
+  get connectionInfo() {
+    return this._connectionInfo;
   }
 
   async connect({ network }: { network: NetworkInfo }) {
@@ -35,13 +36,13 @@ export class TezosService {
       },
     };
     const wallet = new BeaconWallet(options);
-    await wallet
-      .requestPermissions({
-        network: {
-          type: network.type,
-        },
-      })
-      .then((_) => wallet.getPKH())
-      .then((address) => console.log(`Your address: ${address}`));
+    await wallet.requestPermissions({network});
+    const address = await wallet.getPKH();
+    console.log(`Your address: ${address}`);
+    this._tezos.setWalletProvider(wallet);
+    this._connectionInfo = {
+      network,
+      address
+    }
   }
 }

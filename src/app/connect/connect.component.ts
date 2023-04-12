@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TezosService } from '../services/tezos.service';
 import { NetworkInfo } from '../models/tezos-models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connect',
@@ -11,14 +12,15 @@ export class ConnectComponent {
   networks: NetworkInfo[];
   selectedNetwork: NetworkInfo | undefined;
 
-  constructor(private tezos: TezosService) {
+  constructor(private tezos: TezosService, private router: Router) {
     this.networks = tezos.getAvailableNetworks();
   }
 
-  connect() {
+  async connect() {
     if (!this.selectedNetwork) {
       return;
     }
-    this.tezos.connect({ network: this.selectedNetwork });
+    await this.tezos.connect({ network: this.selectedNetwork });
+    this.router.navigate(['tests']);
   }
 }
