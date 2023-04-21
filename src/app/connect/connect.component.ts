@@ -20,6 +20,14 @@ export class ConnectComponent {
     if (!this.selectedNetwork) {
       return;
     }
+    if (window && window.localStorage) {
+      // finds the Beacon keys
+      const beaconKeys = Object.keys(window.localStorage).filter((key) =>
+        key.toLowerCase().includes("beacon")
+      );
+      // deletes the keys
+      beaconKeys.forEach((key) => delete window.localStorage[key]);
+    }
     await this.tezos.connect({ network: this.selectedNetwork });
     this.router.navigate(['tests']);
   }

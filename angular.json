@@ -23,15 +23,71 @@
             "outputPath": "dist/taquito-test-dapp-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@walletconnect/utils",
+              "query-string",
+              "@walletconnect/window-metadata",
+              "@walletconnect/window-getters",
+              "@walletconnect/environment",
+              "@stablelib/x25519-session",
+              "@stablelib/bytes",
+              "@stablelib/nacl",
+              "@stablelib/utf8",
+              "@stablelib/ed25519",
+              "@stablelib/x25519-session",
+              "@stablelib/blake2b",
+              "@stablelib/utf8",
+              "bs58check",
+              "qrcode-svg",
+              "@stablelib/bytes",
+              "@stablelib/nacl",
+              "@stablelib/random",
+              "@walletconnect/environment",
+              "@walletconnect/logger",
+              "events",
+              "pino",
+              "@stablelib/chacha20poly1305",
+              "@stablelib/hkdf",
+              "@stablelib/sha256",
+              "@walletconnect/time",
+              "@walletconnect/window-getters",
+              "@walletconnect/window-metadata",
+              "buffer",
+              "axios/lib/core/buildFullPath",
+              "axios/lib/core/settle",
+              "axios/lib/helpers/buildURL",
+              "axios/lib/utils",
+              "fast-json-stable-stringify",
+              "@stablelib/blake2b",
+              "@stablelib/ed25519",
+              "blakejs",
+              "bs58check",
+              "buffer",
+              "elliptic",
+              "typedarray-to-buffer",
+              "qrcode-svg",
+              "@walletconnect/logger",
+              "@walletconnect/time",
+              "events",
+              "pino",
+              "@stablelib/chacha20poly1305",
+              "@stablelib/hkdf",
+              "@stablelib/sha256"
+            ]
           },
           "configurations": {
             "production": {
@@ -81,10 +137,16 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
